@@ -1,15 +1,12 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-//const googleapis=require("googleapis")
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const GoogleStrategy = require("passport-google-oauth20").Strategy;
-//const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-
 const findOrCreate = require("mongoose-findorcreate");
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -78,7 +75,6 @@ passport.use(
       userProfileURL: "https://www.googleapis.com/oauth2/v3/userinfo",
     },
     function (accessToken, refreshToken, profile, cb) {
-      //console.log(profile)
       User.findOrCreate({ googleId: profile.id }, function (err, user) {
         if (err) {
           console.log(err);
@@ -110,17 +106,10 @@ app.get("/register", function (req, res) {
 //creating secrets route because whenver user want to navigate to secret once logged in then it must be rendered
 app.get("/secrets", function (req, res) {
   User.find({ secrets: { $ne: null } }, function (err, foundUser) {
-    console.log("inside get secrets");
-    // if(err)
-    // {
-    //   console.log("secret is not there")
-    // }
     if (foundUser) {
-      console.log("user is " + foundUser);
-      console.log("render" + foundUser.secrets);
       res.render("secrets", { secretData: foundUser });
     } else {
-      console.log("secrets is secret");
+      console.log("secrets are secret");
     }
   });
 });
@@ -163,6 +152,7 @@ app.post("/register", function (req, res) {
     }
   );
 });
+
 app.get("/submit", function (req, res) {
   if (req.isAuthenticated()) {
     res.render("submit");
@@ -170,7 +160,6 @@ app.get("/submit", function (req, res) {
     console.log("failed");
     res.redirect("/login");
   }
-  //res.render("submit");
 });
 
 app.post("/submit", function (req, res) {
