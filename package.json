@@ -1,5 +1,5 @@
 {
-  "name": "Secrets",
+  "name": "secret",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -16,11 +16,14 @@
     "encrypt": "^0.0.1",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "googleapis": "^73.0.0",
     "md5": "^2.3.0",
     "mongoose": "^5.12.5",
     "mongoose-encryption": "^2.1.0",
     "mongoose-field-encryption": "^4.0.1",
+    "mongoose-findorcreate": "^3.0.0",
     "passport": "^0.4.1",
+    "passport-google-oauth20": "^2.0.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^6.1.0"
   }
